@@ -25,6 +25,100 @@ class LinkedList:
              curr = curr.next
         
         return result+'None'
+    
+    def append(self,value):
+        new_node = Node(value)
+
+        if self.head == None:
+            self.head = new_node
+            self.n += 1
+            return
+        
+        curr = self.head 
+        while curr.next!=None:
+            curr = curr.next
+
+        curr.next = new_node
+        self.n +=1
+
+    def insert_after(self,after,value):
+        new_node = Node(value)
+        curr = self.head
+        while curr!=None:
+            if curr.data == after:
+                break
+            curr = curr.next
+
+        if curr!=None:
+            new_node.next = curr.next
+            curr.next = new_node
+            self.n +=1
+
+        else:
+            return 'not found'
+        
+    ##Deletion
+    def clear(self):
+        self.head = None
+        self.n = 0
+    
+    def del_head(self):
+        if self.head==None:
+            return 'emptyyyy'
+        self.head = self.head.next
+        self.n -=1
+
+    def pop(self):
+        if self.head == None:
+            return 'emptyyyyyList'
+        curr = self.head
+        if curr.next ==None:
+            return self.del_head()
+        while curr.next.next !=None:
+            curr = curr.next
+        curr.next = None
+        self.n -=1
+
+    def remove(self,value):
+         
+         if self.head == None:
+             return 'Empty LL'
+         
+         if self.head.data == value:
+             return self.del_head()
+         
+         curr = self.head
+
+         while curr.next!=None:
+             if curr.next.data == value:
+                 break
+             curr = curr.next
+
+         if curr.next ==None:
+             return 'not found'
+         else:
+             curr.next = curr.next.next
+
+    #search
+    def search(self,value): 
+        curr = self.head
+        pos = 0
+        while curr!=None:
+            if curr.data == value:
+                return pos
+            curr = curr.next
+            pos = pos + 1
+        return 'not found'
+    
+    def __getitem__(self,index):
+        curr = self.head
+        pos =1
+        while curr!=None:
+            if pos==index:
+                return curr.data
+            curr = curr.next
+            pos +=1
+
 
     
 L = LinkedList()
@@ -32,4 +126,7 @@ L.insert_head(1)
 L.insert_head(2)
 L.insert_head(3)
 L.insert_head(4)
+L.append(5)
+L.insert_after(3,9)
+print(L.search(2))
 print(L)
