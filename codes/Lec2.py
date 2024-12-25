@@ -119,6 +119,41 @@ class LinkedList:
             curr = curr.next
             pos +=1
 
+    def replace_max(self,value):
+        temp = self.head
+        max = temp 
+
+        while temp!=None:
+            if temp.data > max.data:
+                max = temp
+            temp = temp.next
+
+        max.data=value
+
+    def sum_odd(self):
+        temp = self.head
+        cnt =0
+
+        while temp!=None:
+            if cnt%2!=0:
+                res += temp.data
+
+            cnt+=1
+            temp = temp.next
+
+        print(res)
+
+    def reverse(self):
+        prev_node = None
+        curr = self.head
+
+        while curr!=None:
+            next_node = curr.next
+            curr.next = prev_node
+            prev_node = curr
+            curr = next_node
+
+        self.head = prev_node
 
     
 L = LinkedList()
@@ -128,5 +163,6 @@ L.insert_head(3)
 L.insert_head(4)
 L.append(5)
 L.insert_after(3,9)
-print(L.search(2))
+L.replace_max(3)
+L.reverse()
 print(L)
